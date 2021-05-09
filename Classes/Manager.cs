@@ -6,7 +6,7 @@ namespace Budget.Classes
 {
     public class Manager
     {
-        private List<Wydatek> listaWydatków = new List<Wydatek> { };
+        private List<Expense> ExpensesList = new List<Expense> { };
 
         private Manager()
         {
@@ -23,64 +23,29 @@ namespace Budget.Classes
             return instance;
         }
 
-        public void NowyWydatek(Wydatek wydatek)
+        public void NewExpense(Expense wydatek)
         {
 
-            listaWydatków.Add(wydatek);
+            ExpensesList.Add(wydatek);
         }
 
-        public List<Wydatek> ZwróćZakupy()
-        {
-            List<Wydatek> wydatki = new List<Wydatek>{ };
-            foreach (Wydatek w in listaWydatków)
+        public List<Expense> GetExpensesOfType(int w_cat){
+            List<Expense> result = new List<Expense> { };
+            foreach(var expense in ExpensesList)
             {
-                if(w is Zakup)
+                if(expense.Category == w_cat)
                 {
-                    wydatki.Add(w);
+                    result.Add(expense);
                 }
             }
-            return wydatki;
+            return result;
+
         }
 
-        public List<Wydatek> ZwróćUsługi()
+        public Expense FindExpense(Expense W)
         {
-            List<Wydatek> wydatki = new List<Wydatek> { };
-            foreach (Wydatek w in listaWydatków)
-            {
-                if (w is Usługa)
-                {
-                    wydatki.Add(w);
-                }
-            }
-            return wydatki;
-        }
-
-        public void WypiszZakupy()
-        {
-            foreach (object w in listaWydatków)
-            {
-                if (w is Zakup)
-                {
-                    Console.WriteLine(w.ToString());
-                }
-            }
-        }
-
-        public void WypiszUsługi()
-        {
-            foreach (object w in listaWydatków)
-            {
-                if (w is Usługa)
-                {
-                    Console.WriteLine(w.ToString());
-                }
-            }
-        }
-
-        public Wydatek ZnajdźWydatek(Wydatek W)
-        {
-            int index = listaWydatków.IndexOf(W);
-            return listaWydatków[index];
+            int index = ExpensesList.IndexOf(W);
+            return ExpensesList[index];
         }
 
 

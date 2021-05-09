@@ -11,12 +11,6 @@ namespace Budget
     {
         public static void Main(string[] args)
         {
-            Manager m1 = Manager.GetInstance();
-            Zakup samochód = new Zakup("Audi a8", 800.0);
-            Usługa abonament = new Usługa("Play", 90.0);
-            m1.NowyWydatek(samochód);
-            m1.NowyWydatek(abonament);
-            m1.WypiszUsługi();
 
         }
     }

@@ -5,31 +5,67 @@ using Budget.Classes;
 
 namespace Budget
 {
-    public class Wydatek
+    public class Expense
     {
-        private double koszt;
-        public double Koszt {
-            get => koszt;
+
+        private int category;
+        private string description;
+        private double cost;
+        private DateTime data;
+
+        public int Category
+        {
+            get => category;
+            set
+            {
+                if (value == null)
+                {
+                    throw new Exception("Type cannot be of type NULL!");
+                }
+                else
+                {
+                    category = value;
+                }
+            }
+
+        }
+
+        public string Description
+        {
+            get => description;
+            set
+            {
+                if (value == null)
+                {
+                    throw new Exception("Description cannot be of type NULL!");
+                }
+                else
+                {
+                    description = value;
+                }
+            }
+
+        }
+        public double Cost {
+            get => cost;
             set
             {
                 if (value <= 0)
                 {
-                    throw new Exception("Koszt nie może być mniejszy od zera!");
+                    throw new Exception("Cost must be higher than 0!");
                 } else
                 {
-                    koszt = value;
+                    cost = value;
                 }
             }
         }
-
-        private DateTime data;
         public DateTime Data {
             get => data;
             set
             {
                 if (value == null)
                 {
-                    throw new Exception("Data nie może być Null");
+                    throw new Exception("Data cannot be of type NULL");
                 } else
                 {
                     data = value;
@@ -37,73 +73,13 @@ namespace Budget
             }
         }
 
-        public Wydatek(){
-            koszt = -1;
-        }
-
-    }
-
-    public class Zakup : Wydatek
-    {
-        private string opis;
-        public string Opis {
-            get => opis;
-            set
-            {
-                if(value == null)
-                {
-                    throw new Exception("Opis nie może być NULLem!");
-                }
-                else
-                {
-                    opis = value;
-                }
-            }
-
-        }
-
-        public Zakup(string w_opis, double w_koszt)
+        public Expense(int w_cat, string w_desc, double w_cost)
         {
-            Opis = w_opis;
-            Koszt = w_koszt;
+            Category = w_cat;
+            Description = w_desc;
+            Cost = w_cost;
             Data = DateTime.Now;
         }
 
-        override public string ToString()
-        {
-            return $"Opis: {this.Opis} | Koszt: {this.Koszt} | Data: {this.Data}" ;
-        }
-    }
-
-    public class Usługa : Wydatek
-    {
-        private string opis;
-        public string Opis
-        {
-            get => opis;
-            set
-            {
-                if (value == null)
-                {
-                    throw new Exception("Opis nie może być NULLem!");
-                }
-                else
-                {
-                    opis = value;
-                }
-            }
-        }
-
-        public Usługa(string w_opis, double w_koszt)
-        {
-            Opis = w_opis;
-            Koszt = w_koszt;
-            Data = DateTime.Now;
-        }
-
-        override public string ToString()
-        {
-            return $"Opis: {this.Opis} | Koszt: {this.Koszt} | Data: {this.Data}";
-        }
     }
 }
